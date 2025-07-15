@@ -1,26 +1,29 @@
+
 ---
 
 ```markdown
-# 🚀 My Custom Network on AWS
+# 🚀 Build a Custom AWS VPC Network
 
-This project is a hands-on dive into AWS VPC networking. You'll learn to build a custom Virtual Private Cloud with both public and private components, security controls, and EC2 instances—all while exploring infrastructure fundamentals.
+This project is a hands-on deep dive into AWS VPC networking. You'll provision a fully functional custom VPC with public/private subnets, routing, security controls, and EC2 instances—gaining foundational infrastructure skills along the way.
 
 ---
 
 ## 🎯 Project Overview
 
-Build a custom AWS VPC with the following resources:
+You'll build a VPC setup with the following components:
 
 - ✅ Public and private subnets
 - ✅ Internet Gateway (IGW)
 - ✅ NAT Gateway (EIP-based)
-- ✅ Route Tables (public & private)
+- ✅ Public and private route tables
 - ✅ EC2 instances in each subnet
-- ✅ Security Groups and NACLs
+- ✅ Security Groups and Network ACLs
 
 ---
 
 ## 📐 Architecture Diagram
+
+```
 
 ```
             ┌─────────────────────────────┐
@@ -51,24 +54,26 @@ Build a custom AWS VPC with the following resources:
             └─────────────────────────────┘
 ```
 
+```
+
 ---
 
-## 🛠 Tools
+## 🛠️ Tools
 
-You can implement this setup using:
+You can implement this infrastructure using:
 
-- **Terraform** – for infrastructure as code (IaC)
-- **AWS Console** – for visual, manual provisioning
-- ✅ Optional: Comparison or hybrid implementation
+- **Terraform** – Infrastructure as Code (IaC)
+- **AWS Console** – Manual UI-based provisioning
+- ✅ Optional: Try both and compare the experience
 
 ---
 
 ## 📌 Tasks Breakdown
 
-### Phase 1: Networking
+### Phase 1: Networking Setup
 
-1. **Create VPC**
-   - CIDR block: `10.0.0.0/16`
+1. **Create a VPC**
+   - CIDR: `10.0.0.0/16`
    - Enable DNS hostnames
 
 2. **Create Subnets**
@@ -76,69 +81,70 @@ You can implement this setup using:
    - Private Subnet: `10.0.2.0/24` (us-east-1a)
 
 3. **Internet Gateway**
-   - Create & attach to VPC
+   - Create and attach it to the VPC
 
 4. **Route Tables**
-   - Public RT → IGW
-   - Private RT → NAT Gateway
+   - Public Route Table → IGW
+   - Private Route Table → NAT Gateway
 
 5. **NAT Gateway**
-   - Allocate Elastic IP
-   - Deploy in Public Subnet
+   - Allocate an Elastic IP
+   - Launch in the public subnet
 
 ---
 
 ### Phase 2: EC2 Deployment
 
 6. **Launch EC2 Instances**
-   - Web (Public): Amazon Linux, SSH/HTTP open
-   - DB (Private): Amazon Linux, locked-down
+   - Public EC2 (Web): Amazon Linux, open to SSH/HTTP
+   - Private EC2 (DB): Amazon Linux, no direct internet
 
-7. **Security Groups**
-   - Web SG → Allow SSH/HTTP from your IP
-   - DB SG → Allow only inbound from Web SG
+7. **Configure Security Groups**
+   - Web SG: Allow SSH/HTTP from your IP
+   - DB SG: Allow inbound traffic only from Web SG
 
 ---
 
-### ✅ Connectivity Testing
+### ✅ Connectivity Tests
 
-- SSH into Public EC2
-- From there, SSH into Private EC2
-- Ping outbound (e.g., `curl google.com`) from Private instance via NAT
+- SSH into the public EC2 instance
+- From there, SSH into the private EC2
+- Verify outbound access (e.g., `curl google.com`) from the private instance through the NAT Gateway
 
 ---
 
 ## ⚡ Optional Enhancements
 
-- Add Network ACLs
-- Use multiple Availability Zones
-- Add Bastion Host or jumpbox
-- Private S3 access with VPC Endpoint
+Take it further with:
+
+- ✅ Multiple Availability Zones for high availability
+- ✅ Bastion Host or jumpbox for secure access
+- ✅ Network ACLs for subnet-level traffic control
+- ✅ S3 VPC Endpoint for private access to S3
 
 ---
 
 ## 📚 Learning Outcomes
 
-By completing this project, you'll gain practical experience with:
+By completing this project, you'll understand:
 
-- VPC design and subnetting
-- NAT vs IGW and routing logic
-- EC2 connectivity across tiers
-- Basic security practices with SGs and NACLs
-- Terraform or AWS Console provisioning
+- VPC design and subnet architecture
+- Routing logic: IGW vs NAT
+- Secure communication between EC2 tiers
+- IAM roles, SGs, and NACLs
+- Provisioning via Terraform or AWS Console
 
 ---
 
-## 🚀 Next Steps
+## 🚀 What's Next?
 
 Choose your deployment style:
 
-> **1. Terraform**
-> **2. AWS Console**
-> **3. Both (Hybrid or comparison)**
+1. **Terraform**
+2. **AWS Console**
+3. **Both (Hybrid or comparison)**
 
-Let me know and I’ll walk you through it step-by-step!
-
+Let me know, and I’ll walk you through your preferred approach step-by-step!
 ```
 
 ---
