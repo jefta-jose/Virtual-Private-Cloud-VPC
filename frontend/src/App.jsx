@@ -1,33 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useCreateMovieMutation, useGetMoviesQuery, useDeleteMovieMutation } from './features/movies'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const { data: movies } = useGetMoviesQuery();
+    const [createMovie] = useCreateMovieMutation();
+    const [deleteMovie] = useDeleteMovieMutation();
+
+    const handleDeleteMovie = async (id) => {
+        try {
+            await deleteMovie(id);
+        } catch (error) {
+            console.error('Error deleting movie:', error);
+        }
+    }
+
+    //add a new movie
+    const handleCreateMovie = async() =>{
+      try {
+        await createMovie({
+          title: 'New Movie',
+          description: 'Description of new movie',
+          year: 2023
+        });
+      } catch (error) {
+        console.error('Error creating movie:', error);
+      }
+    } 
+    
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <button onClick={handleCreateMovie}>Create New Movie</button>
+      <div className='movies-table'>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Year</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {movies && movies.map(movie => (
+              <tr key={movie.id}>
+                <td>{movie.title}</td>
+                <td>{movie.description}</td>
+                <td>{movie.year}</td>
+                <td className='actions'>
+                  <button>Update</button>
+                  <button onClick={()=> handleDeleteMovie(movie.id)} >Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
