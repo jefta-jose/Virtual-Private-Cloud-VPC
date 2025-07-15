@@ -4,6 +4,8 @@
 # - Throws detailed errors when data is invalid
 
 from pydantic import BaseModel
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 class MovieBase(BaseModel):
     title: str
@@ -14,7 +16,7 @@ class MovieCreate(MovieBase):
     pass
 
 class Movie(MovieBase):
-    id: str
-    
+    id: uuid.UUID
+
     class Config:
-        orm_mode = True
+        from_attributes = True

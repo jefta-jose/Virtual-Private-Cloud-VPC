@@ -90,3 +90,24 @@ docker volume rm pgdata  # optional: deletes all saved data
 ```
 
 ---
+
+
+To connect your **PostgreSQL Docker container** to the **PostgreSQL extension in VS Code**, follow these steps:
+
+---
+
+### 🧠 What the Extension Needs
+
+The **PostgreSQL extension** by Microsoft (or similar) needs:
+
+| Field        | Value                        |
+| ------------ | ---------------------------- |
+| **Hostname** | `localhost` *(or 127.0.0.1)* |
+| **Port**     | `5432` *(default)*           |
+| **Database** | `mydb`                       |
+| **Username** | `myuser`                     |
+| **Password** | `mypassword`                 |
+
+These values must match what you used when running your container.
+
+---
