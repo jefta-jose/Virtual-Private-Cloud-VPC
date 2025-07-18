@@ -29,3 +29,17 @@ module "route-table" {
   cidr_private_subnet = module.subnets.cidr_private_subnet
   aws_nat_gateway = module.nat-gateway.aws_nat_gateway
 }
+
+module "route-table-subnets-association" {
+  source = "../modules/route-table-subnets-association"
+  cidr_public_subnet = module.subnets.cidr_public_subnet
+  public_subnet = module.subnets.public_subnet
+  public_subnet_id = module.subnets.public_subnet_id
+  public_route_table = module.route-table.public_route_table
+  public_route_table_id = module.route-table.public_route_table_id
+  cidr_private_subnet = module.subnets.cidr_private_subnet
+  private_subnet = module.subnets.private_subnet
+  private_subnet_id = module.subnets.private_subnet_id
+  private_route_table = module.route-table.private_route_table
+  private_route_table_id = module.route-table.private_route_table_id
+}
