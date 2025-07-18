@@ -15,3 +15,8 @@ module "internet-gateway" {
   source = "../modules/internet-gateway"
   vpc_id = module.vpc.vpc_id
 }
+
+module "nat-gateway" {
+  source = "../modules/nat-gateway"
+  cidr_private_subnet = module.subnets.cidr_private_subnet
+}
