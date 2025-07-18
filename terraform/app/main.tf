@@ -20,3 +20,12 @@ module "nat-gateway" {
   source = "../modules/nat-gateway"
   cidr_private_subnet = module.subnets.cidr_private_subnet
 }
+
+module "route-table" {
+  source = "../modules/route-table"
+  vpc_id = module.vpc.vpc_id
+  aws_internet_gateway_id = module.internet-gateway.internet_gateway_id
+  aws_nat_gateway_id = module.nat-gateway.nat_gateway_id
+  cidr_private_subnet = module.subnets.cidr_private_subnet
+  aws_nat_gateway = module.nat-gateway.aws_nat_gateway
+}
