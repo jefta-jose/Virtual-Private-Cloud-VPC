@@ -10,3 +10,8 @@ module "subnets" {
   cidr_private_subnet = ["10.0.3.0/24", "10.0.4.0/24"]
   eu_availability_zone = ["us-east-1a", "us-east-1b"]
 }
+
+module "internet-gateway" {
+  source = "../modules/internet-gateway"
+  vpc_id = module.vpc.vpc_id
+}
